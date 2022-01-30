@@ -17,8 +17,8 @@ class CreateSellsTable extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->foreignId('car_id');
-            $table->timestamp('sold_at');
-            $table->timestamps()->nullable();
+            $table->timestamp('sold_at')->nullable();
+            $table->timestamps();
         });
     }
 

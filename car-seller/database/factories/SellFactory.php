@@ -3,6 +3,9 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use \App\Models\User;
+use \App\Models\Car;
+use \App\Models\Sell;
 
 class SellFactory extends Factory
 {
@@ -11,10 +14,14 @@ class SellFactory extends Factory
      *
      * @return array
      */
+
+    protected $model = Sell::class;
+
     public function definition()
     {
         return [
-            //
+            'user_id'=> User::factory(),
+            'car_id'=> Car::factory(),
         ];
     }
 }
