@@ -15,4 +15,9 @@ class Car extends Model
         'hp',
     ];
 
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class);
+    }
+
 }
