@@ -20,4 +20,8 @@ class Car extends Model
         return $this->belongsTo(Brand::class);
     }
 
+    public function sells()
+    {
+        return $this->hasMany(Sell::class);
+    }
 }
