@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ChangeTablenameUsersToSellers extends Migration
+class CreateCarsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,13 @@ class ChangeTablenameUsersToSellers extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            Schema::rename('users', 'sellers');
+        Schema::create('cars', function (Blueprint $table) {
+            $table->id();
+            $table->string('brand');
+            $table->string('model');
+            $table->string('cubic_capacity');
+            $table->string('horse_powers');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +30,6 @@ class ChangeTablenameUsersToSellers extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            Schema::rename('sellers', 'users');
-        });
+        Schema::dropIfExists('cars');
     }
 }
