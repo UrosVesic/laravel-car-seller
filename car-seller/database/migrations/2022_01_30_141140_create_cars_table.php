@@ -18,6 +18,7 @@ class CreateCarsTable extends Migration
             $table->string('model');
             $table->string('cubic_capacity');
             $table->string('horse_powers');
+            $table->foreignId('brand_id');
             $table->timestamps();
         });
     }
