@@ -6,6 +6,8 @@ use App\Models\Sell;
 use App\Http\Resources\SellResource;
 use App\Http\Resources\SellCollection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class SellController extends Controller
 {
@@ -39,8 +41,7 @@ class SellController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'user_id' => 'required',
-            'car_id' => 'required',
+            'car_id' => 'required|integer',
         ]);
 
         if ($validator->fails())
@@ -88,7 +89,6 @@ class SellController extends Controller
     public function update(Request $request, Sell $sell)
     {
         $validator = Validator::make($request->all(), [
-            'user_id' => 'required',
             'car_id' => 'required',
         ]);
 
@@ -112,6 +112,6 @@ class SellController extends Controller
      */
     public function destroy(Sell $sell)
     {
-        return response()->json('Sell is deleted successfully');
+        return response()->json(['Sell is deleted successfully'],new SellResource($sell));
     }
 }

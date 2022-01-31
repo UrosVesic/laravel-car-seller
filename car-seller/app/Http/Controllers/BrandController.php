@@ -8,6 +8,7 @@ use App\Http\Resources\BrandResource;
 use App\Http\Resources\CarResource;
 use App\Http\Resources\CarCollection;
 use App\Http\Resources\BrandCollection;
+use Illuminate\Support\Facades\Validator;
 
 class BrandController extends Controller
 {
@@ -29,7 +30,7 @@ class BrandController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -40,9 +41,24 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        $brand = Brand::factory()->create();
-        $brand->save();
-        return response()->json(['New brand stored->',new BrandResource($brand)]);
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string',
+            'country'=> 'required|string',
+        ]);
+
+        if ($validator->fails())
+            return response()->json($validator->errors());
+
+        $brand = Brand::create([
+            'brand_id' => $request->brand_id,
+            'model' => $request->model,
+            'cc' => $request->cc,
+            'hp' => $request->hp,
+            
+
+        ]);
+
+        return response()->json(['Brand is created successfully.', new BrandResource($brand)]);
     }
 
     /**
@@ -76,7 +92,22 @@ class BrandController extends Controller
      */
     public function update(Request $request, Brand $brand)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string',
+            'country'=> 'required|string',
+        ]);
+
+        if ($validator->fails())
+            return response()->json($validator->errors());
+
+            $brand->brand_id = $request->brand_id;
+            $brand->model = $request->model;
+            $brand->cc = $request->cc;
+            $brand->hp = $request->hp;
+
+        
+
+        return response()->json(['Brand is updated successfully.', new BrandResource($brand)]);
     }
 
     /**

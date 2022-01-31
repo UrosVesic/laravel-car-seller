@@ -30,10 +30,25 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 /*Route::resource('sells',SellController::class);
 Route::resource('cars',CarController::class);
 Route::resource('users',UserController::class);
-Route::resource('brands',BrandController::class);
-Route::resource('users.sells',UserSellController::class);*/
+Route::resource('brands',BrandController::class);*/
+Route::resource('users.sells',UserSellController::class)->only('index');
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
 
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::get('/profile', function (Request $request) {
+        return auth()->user();
+    });
+
+    Route::resource('sells', SellController::class)->only(['update', 'store', 'destroy']);
+    Route::resource('cars',CarController::class)->only(['update', 'store', 'destroy']);
+    Route::resource('brands',BrandController::class)->only(['update', 'store', 'destroy']);
+
+    Route::post('/logout', [AuthController::class, 'logout']);
+});
+
+    Route::resource('sells', SellController::class)->only(['index', 'show']);
+    Route::resource('cars',CarController::class)->only(['index', 'show']);
+    Route::resource('brands',BrandController::class)->only(['index', 'show']);

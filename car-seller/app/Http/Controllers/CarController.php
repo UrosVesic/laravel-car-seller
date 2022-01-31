@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Car;
 use App\Http\Resources\CarResource;
 use App\Http\Resources\CarCollection;
+use App\Http\Resources\SellCollection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CarController extends Controller
 {
@@ -38,9 +40,26 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-        $car = Car::factory()->create();
-        $car->save();
-        return response()->json(['New car stored->',new CarResource($car)]);
+        $validator = Validator::make($request->all(), [
+            'brand_id' => 'required|integer',
+            'model'=> 'required|string',
+            'cc'=>'required|integer',
+            'hp'=>'required|integer'
+        ]);
+
+        if ($validator->fails())
+            return response()->json($validator->errors());
+
+        $car = Car::create([
+            'brand_id' => $request->brand_id,
+            'model' => $request->model,
+            'cc' => $request->cc,
+            'hp' => $request->hp,
+            
+
+        ]);
+
+        return response()->json(['Car is created successfully.', new CarResource($car)]);
     }
 
     /**
@@ -74,7 +93,25 @@ class CarController extends Controller
      */
     public function update(Request $request, Car $car)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'brand_id' => 'required|integer',
+            'model'=> 'required|string',
+            'cc'=>'required|integer',
+            'hp'=>'required|integer'
+        ]);
+
+        if ($validator->fails())
+            return response()->json($validator->errors());
+
+            $car->brand_id = $request->brand_id;
+            $car->model = $request->model;
+            $car->cc = $request->cc;
+            $car->hp = $request->hp;
+
+            $car->save();
+
+
+        return response()->json(['Car is updated successfully.', new CarResource($sell)]);
     }
 
     /**
@@ -86,6 +123,6 @@ class CarController extends Controller
     public function destroy(Car $car)
     {
         $car->delete();
-        return response()->json(['Car deleted',new CarResource($car)]);
+        return response()->json(['Car deleted',new CarResource($car),'Sells deleted',new SellCollection($car->sells)]);
     }
 }
