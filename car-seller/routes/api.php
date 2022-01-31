@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SellController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\BrandController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,3 +28,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::resource('sells',SellController::class);
 Route::resource('cars',CarController::class);
 Route::resource('users',UserController::class);
+Route::resource('brands',BrandController::class);
