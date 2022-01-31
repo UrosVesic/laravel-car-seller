@@ -38,7 +38,22 @@ class SellController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'user_id' => 'required',
+            'car_id' => 'required',
+        ]);
+
+        if ($validator->fails())
+            return response()->json($validator->errors());
+
+        $sell = Sell::create([
+            'car_id' => $request->car_id,
+            'user_id' => Auth::user()->id,
+            'sold_at' => $request->sold_at,
+
+        ]);
+
+        return response()->json(['Sell is created successfully.', new SellResource($sell)]);
     }
 
     /**
@@ -72,7 +87,21 @@ class SellController extends Controller
      */
     public function update(Request $request, Sell $sell)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'user_id' => 'required',
+            'car_id' => 'required',
+        ]);
+
+        if ($validator->fails())
+            return response()->json($validator->errors());
+
+            $sell->car_id = $request->car_id;
+            $sell->sold_at = $request->sold_at;
+
+            $sell->save();
+
+
+        return response()->json(['Sell is updated successfully.', new SellResource($sell)]);
     }
 
     /**
@@ -83,6 +112,6 @@ class SellController extends Controller
      */
     public function destroy(Sell $sell)
     {
-        //
+        return response()->json('Sell is deleted successfully');
     }
 }
