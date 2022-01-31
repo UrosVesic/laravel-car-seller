@@ -7,6 +7,7 @@ use App\Http\Controllers\CarController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\UserSellController;
+use App\Http\Controllers\Api\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,10 +27,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //Route::get('/sells/{id}',[SellController::class,'show']);
 //Route::get('/sells',[SellController::class,'index']);
 
-Route::resource('sells',SellController::class);
+/*Route::resource('sells',SellController::class);
 Route::resource('cars',CarController::class);
 Route::resource('users',UserController::class);
 Route::resource('brands',BrandController::class);
-Route::resource('users.sells',UserSellController::class);
+Route::resource('users.sells',UserSellController::class);*/
+
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
 
 
