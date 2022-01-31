@@ -50,10 +50,9 @@ class BrandController extends Controller
             return response()->json($validator->errors());
 
         $brand = Brand::create([
-            'brand_id' => $request->brand_id,
-            'model' => $request->model,
-            'cc' => $request->cc,
-            'hp' => $request->hp,
+            'name' => $request->name,
+            'country' => $request->country,
+            
             
 
         ]);
@@ -100,10 +99,8 @@ class BrandController extends Controller
         if ($validator->fails())
             return response()->json($validator->errors());
 
-            $brand->brand_id = $request->brand_id;
-            $brand->model = $request->model;
-            $brand->cc = $request->cc;
-            $brand->hp = $request->hp;
+            $brand->name = $request->name;
+            $brand->country = $request->country;
 
         
 
