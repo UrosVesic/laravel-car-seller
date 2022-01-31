@@ -29,3 +29,5 @@ Route::resource('sells',SellController::class);
 Route::resource('cars',CarController::class);
 Route::resource('users',UserController::class);
 Route::resource('brands',BrandController::class);
+
+

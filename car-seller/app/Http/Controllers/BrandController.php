@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Brand;
 use Illuminate\Http\Request;
 use App\Http\Resources\BrandResource;
+use App\Http\Resources\CarResource;
+use App\Http\Resources\CarCollection;
 use App\Http\Resources\BrandCollection;
 
 class BrandController extends Controller
@@ -38,7 +40,9 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $brand = Brand::factory()->create();
+        $brand->save();
+        return response()->json(['New brand stored->',new BrandResource($brand)]);
     }
 
     /**
@@ -83,6 +87,7 @@ class BrandController extends Controller
      */
     public function destroy(Brand $brand)
     {
-        //
+        $brand->delete();
+        return response()->json(['Brand deleted',new BrandResource($brand),'Cars deleted',new CarCollection($brand->cars)]);
     }
 }

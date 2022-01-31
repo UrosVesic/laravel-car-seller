@@ -27,7 +27,7 @@ class CarController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -38,7 +38,9 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $car = Car::factory()->create();
+        $car->save();
+        return response()->json(['New car stored->',new CarResource($car)]);
     }
 
     /**
@@ -83,6 +85,7 @@ class CarController extends Controller
      */
     public function destroy(Car $car)
     {
-        //
+        $car->delete();
+        return response()->json(['Car deleted',new CarResource($car)]);
     }
 }
