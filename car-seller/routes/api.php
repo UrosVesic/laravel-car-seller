@@ -6,6 +6,7 @@ use App\Http\Controllers\SellController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\UserSellController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,5 +30,6 @@ Route::resource('sells',SellController::class);
 Route::resource('cars',CarController::class);
 Route::resource('users',UserController::class);
 Route::resource('brands',BrandController::class);
+Route::resource('users.sells',UserSellController::class);
 
 
