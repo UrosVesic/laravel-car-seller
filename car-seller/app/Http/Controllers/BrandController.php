@@ -52,9 +52,9 @@ class BrandController extends Controller
         $brand = Brand::create([
             'name' => $request->name,
             'country' => $request->country,
-            
-            
 
+
+            
         ]);
 
         return response()->json(['Brand is created successfully.', new BrandResource($brand)]);

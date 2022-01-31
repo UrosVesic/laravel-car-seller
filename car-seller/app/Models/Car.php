@@ -13,6 +13,7 @@ class Car extends Model
         'model',
         'cc',
         'hp',
+        'brand_id'
     ];
 
     public function brand()
