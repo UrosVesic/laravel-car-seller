@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Sell;
-use App\Http\Resources\SellResource;
-use App\Http\Resources\SellCollection;
+use App\Models\Car;
+use App\Http\Resources\CarResource;
+use App\Http\Resources\CarCollection;
 use Illuminate\Http\Request;
 
-class SellController extends Controller
+class CarController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,8 @@ class SellController extends Controller
      */
     public function index()
     {
-        $sells = Sell::all();
-       return new SellCollection($sells);
+        $cars = Car::all();
+        return new CarCollection($cars);
     }
 
     /**
@@ -44,21 +44,21 @@ class SellController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Sell  $sell
+     * @param  \App\Models\Car  $car
      * @return \Illuminate\Http\Response
      */
-    public function show(Sell $sell)
+    public function show(Car $car)
     {
-       return new SellResource($sell);
+        return new CarResource($car);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Sell  $sell
+     * @param  \App\Models\Car  $car
      * @return \Illuminate\Http\Response
      */
-    public function edit(Sell $sell)
+    public function edit(Car $car)
     {
         //
     }
@@ -67,10 +67,10 @@ class SellController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Sell  $sell
+     * @param  \App\Models\Car  $car
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Sell $sell)
+    public function update(Request $request, Car $car)
     {
         //
     }
@@ -78,10 +78,10 @@ class SellController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Sell  $sell
+     * @param  \App\Models\Car  $car
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Sell $sell)
+    public function destroy(Car $car)
     {
         //
     }
