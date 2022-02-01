@@ -8,16 +8,19 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
+use App\Rules\hasNumber;
 
 class AuthController extends Controller
 {
     public function register(Request $request)
-    {
+    {   
+        
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|string|max:255|email|unique:users',
-            'password' => 'required|string|min:8'
+            'password' => ['required', 'string', 'min:8', new hasNumber],
         ]);
+        
         if ($validator->fails())
             return response()->json($validator->errors());
 
