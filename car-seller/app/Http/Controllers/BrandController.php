@@ -9,6 +9,7 @@ use App\Http\Resources\CarResource;
 use App\Http\Resources\CarCollection;
 use App\Http\Resources\BrandCollection;
 use Illuminate\Support\Facades\Validator;
+use App\Rules\isCountry;
 
 class BrandController extends Controller
 {
@@ -43,7 +44,7 @@ class BrandController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string',
-            'country'=> 'required|string',
+            'country' => ['required', 'string',  new isCountry],
         ]);
 
         if ($validator->fails())
@@ -93,7 +94,7 @@ class BrandController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string',
-            'country'=> 'required|string',
+            'country' => ['required', 'string',  new isCountry],
         ]);
 
         if ($validator->fails())
